@@ -96,29 +96,30 @@ public class LancamentoServiceImpl implements LancamentoService {
 		}
 	}
 
-//	@Override
-//	public Optional<Lancamento> obterPorId(Long id) {
-//		return repository.findById(id);
-//	}
+	@Override
+	public Optional<Lancamento> obterPorId(Long id) {
+		return repository.findById(id);
+	}
 
-//	@Override
-//	@Transactional(readOnly = true) //faz comite se ok, ou rollback se erro, apenas leitura.
-//	public BigDecimal obterSaldoPorUsuario(Long id) {
-//
-//		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuarioEStatus(id, TipoLancamento.RECEITA,
-//				StatusLancamento.EFETIVADO);
-//		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuarioEStatus(id, TipoLancamento.DESPESA,
-//				StatusLancamento.EFETIVADO);
-//
-//		if (receitas == null) {
-//			receitas = BigDecimal.ZERO;
-//		}
-//
-//		if (despesas == null) {
-//			despesas = BigDecimal.ZERO;
-//		}
-//
-//		return receitas.subtract(despesas);
-//	}
+	@Override
+	@Transactional(readOnly = true) //faz comite se ok, ou rollback se erro, apenas leitura.
+	public BigDecimal obterSaldoPorUsuario(Long id) {
+
+		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuarioEStatus(id, TipoLancamento.RECEITA,
+				StatusLancamento.EFETIVADO);
+		
+		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuarioEStatus(id, TipoLancamento.DESPESA,
+				StatusLancamento.EFETIVADO);
+
+		if (receitas == null) {
+			receitas = BigDecimal.ZERO;
+		}
+
+		if (despesas == null) {
+			despesas = BigDecimal.ZERO;
+		}
+
+		return receitas.subtract(despesas);
+	}
 
 }

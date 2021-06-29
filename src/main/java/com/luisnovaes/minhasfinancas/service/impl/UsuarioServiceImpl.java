@@ -28,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if (!usuario.isPresent()) {
 			throw new ErroAutenticacao("Usuário não encontrado para o email informado.");
 		}
-		
+
 		if (!usuario.get().getSenha().equals(senha)) {
 			throw new ErroAutenticacao("Senha inválida.");
 		}
@@ -51,6 +51,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if (existe) {
 			throw new RegraNegocioException("Já existe um usuario cadastrado com este email.");
 		}
+	}
+
+	@Override
+	public Optional<Usuario> obterPorId(Long id) {
+		return repository.findById(id);
 	}
 
 }
